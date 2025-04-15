@@ -5,6 +5,9 @@ from tensorflow.keras.datasets import imdb
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import matplotlib.pyplot as plt
 
+# Set page config FIRST before any Streamlit commands
+st.set_page_config(page_title="🎬 IMDB Sentiment Analysis", layout="centered")
+
 # Constants
 VOCAB_SIZE = 10000
 MAX_LEN = 200
@@ -25,7 +28,7 @@ def get_word_index():
     index_word[2] = "<UNK>"
     index_word[3] = "<UNUSED>"
     word_index["<PAD>"] = 0
-    word_index["<START>"] = 1
+    word_index["<START"] = 1
     word_index["<UNK>"] = 2
     word_index["<UNUSED>"] = 3
     return word_index
@@ -52,7 +55,6 @@ def predict_sentiment(text):
     return pred
 
 # Streamlit UI
-st.set_page_config(page_title="🎬 IMDB Sentiment Analysis", layout="centered")
 st.title("🎬 Movie Review Sentiment Analyzer")
 st.markdown("Enter a movie review below to check whether it's **Positive** or **Negative**.")
 
