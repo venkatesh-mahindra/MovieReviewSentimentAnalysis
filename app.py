@@ -30,7 +30,7 @@ def get_word_index():
     word_index["<PAD>"] = 0
     word_index["<START"] = 1
     word_index["<UNK>"] = 2
-    word_index["<UNUSED>"] = 3
+    word_index["<UNUSED"] = 3
     return word_index
 
 word_index = get_word_index()
@@ -66,6 +66,8 @@ if st.button("Analyze"):
     else:
         with st.spinner("Analyzing..."):
             score = predict_sentiment(review_input)
+            score = float(score)  # Ensure it's a proper float
+            
             if score >= 0.5:
                 st.success(f"👍 Positive Sentiment ({score:.2f})")
                 st.image("https://i.imgur.com/8bI0nFQ.png", width=200)  # Happy face
@@ -74,7 +76,7 @@ if st.button("Analyze"):
                 st.image("https://i.imgur.com/Ql5zN7U.png", width=200)  # Sad face
 
         st.markdown("### Sentiment Score Breakdown")
-        st.progress(score)
+        st.progress(min(max(score, 0.0), 1.0))  # Safe progress bar value
 
 st.markdown("---")
-st.caption("Built with TensorFlow and Streamlit by [Venkatesh Mahindra✨]")
+st.caption("Built with TensorFlow and Streamlit by Venkatesh Mahindra✨")
